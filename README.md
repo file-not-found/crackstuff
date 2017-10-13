@@ -1,6 +1,8 @@
 # crackstuff
 
 Some files and scripts to help cracking passwords during a penetration test.
+For some notes on cracking and wordlist creation see 
+[http://exitno.de/cracking/](http://exitno.de/cracking/).
 
 ## scripts
 
