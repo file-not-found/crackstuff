@@ -1,9 +1,16 @@
 #!/usr/bin/env python2
 from bs4 import BeautifulSoup
 from urllib2 import Request,urlopen
+from argparse import ArgumentParser
 
-outfile='webcrawl.out'
-baseurl='http://exitno.de/'
+parser = ArgumentParser()
+parser.add_argument("url", help="url to start from")
+parser.add_argument("-d", "--depth", type=int, default=1,
+    help="crawling depth")
+args=parser.parse_args()
+
+baseurl = args.url
+if baseurl[-1] != '/': baseurl+='/'
 
 nogo=('css','js','pdf')
 
@@ -15,9 +22,12 @@ def valid_link(ref):
     else:
         return True
 
-def get_words(url, handle, depth):
+def get_words(url, depth):
     req= Request(url)
-    resp= urlopen(req)
+    try:
+        resp= urlopen(req)
+    except:
+        return
     html= resp.read()
 
     soup=BeautifulSoup(html, 'html.parser')
@@ -29,18 +39,12 @@ def get_words(url, handle, depth):
 
     if text != None:
         for word in text.split():
-            if handle != None:
-                handle.write(word+"\n")
-            else:
-                print(word)
+            print(word)
 
         if depth > 0:
             for link in soup.find_all('a'):
                 ref=link.get('href')
                 if valid_link(ref):
-                    get_words(baseurl+ref[1:], handle, depth-1)
+                    get_words(baseurl+ref[1:], depth-1)
 
-h=None        
-# h=open(outfile,'wb')
-get_words(baseurl, h, 1)
-# h.close()
+get_words(baseurl, args.depth)

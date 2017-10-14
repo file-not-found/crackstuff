@@ -9,7 +9,7 @@ For some notes on cracking and wordlist creation see
 * `dates.py` prints 8 digit dates as MMDDYYYY and DDMMYYYY
 * `easy_patterns.py` prints easy character patterns and repetitions
 * `list_combine.py` combines every word from two text files
-* `webcrawl.py` prints every word found in the body of an url
+* `webcrawl.py` prints every word found in the body of a website
 
 ## rules
 

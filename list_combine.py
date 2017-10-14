@@ -1,13 +1,25 @@
 #!/usr/bin/env python
-file1=  'small.rule'
-file2=  'combo.rule'
+from argparse import ArgumentParser
 
-f1=open(file1,'r')
-f2=open(file2,'r')
+parser = ArgumentParser()
+parser.add_argument("file1", help="first file")
+parser.add_argument("file2", nargs='?', default=None, help="second file")
+parser.add_argument("-d", "--delimiter", type=str, default=' ',
+    help="delimiter between words")
+parser.add_argument("--double", action="store_true",
+    help="combine equal words")
+args=parser.parse_args()
 
+d = args.delimiter
+
+f1=open(args.file1,'r')
 h1=f1.readlines()
-h2=f2.readlines()
-#h2=h1
+
+if args.file2 != None:
+    f2=open(args.file2,'r')
+    h2=f2.readlines()
+else:
+    h2=h1
 
 for l1 in h1:
     for l2 in h2:
@@ -17,6 +29,5 @@ for l1 in h1:
             print(l2.rstrip())
         elif len(w2) == 0:
             print(l1.rstrip())
-        elif not w1 == w2:
-            print("%s %s" % (w2,w1))
-    f2.seek(0)
+        elif not w1 == w2 or args.double:
+            print("%s%s%s" % (w2, d ,w1))
