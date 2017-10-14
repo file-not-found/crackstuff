@@ -9,13 +9,15 @@ parser.add_argument("-d", "--depth", type=int, default=1,
     help="crawling depth")
 args=parser.parse_args()
 
-baseurl = args.url
+baseurl = '/'.join(args.url.split('/')[:3])
 if baseurl[-1] != '/': baseurl+='/'
 
 nogo=('css','js','pdf')
 
 def valid_link(ref):
-    if not ref[0] == '/':
+    if not ref:
+        return False
+    elif not ref[0] == '/':
         return False
     elif ref.split('.')[-1] in nogo:
         return False
