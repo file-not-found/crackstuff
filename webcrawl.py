@@ -10,7 +10,6 @@ parser.add_argument("-d", "--depth", type=int, default=1,
 args=parser.parse_args()
 
 baseurl = '/'.join(args.url.split('/')[:3])
-if baseurl[-1] != '/': baseurl+='/'
 
 nogo=('css','js','pdf')
 
@@ -42,11 +41,11 @@ def get_words(url, depth):
     if text != None:
         for word in text.split():
             print(word)
-
+    
         if depth > 0:
             for link in soup.find_all('a'):
                 ref=link.get('href')
                 if valid_link(ref):
-                    get_words(baseurl+ref[1:], depth-1)
+                    get_words(baseurl+ref, depth-1)
 
-get_words(baseurl, args.depth)
+get_words(args.url, args.depth)
