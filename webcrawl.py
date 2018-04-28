@@ -25,6 +25,7 @@ def valid_link(ref):
 
 def get_words(url, depth):
     req= Request(url)
+    req.add_header('User-Agent','Mozilla/5.0')
     try:
         resp= urlopen(req)
     except:
