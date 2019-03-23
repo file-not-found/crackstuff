@@ -10,13 +10,13 @@ infile=open(args.file,'r')
 
 for l in infile:
     mask=''
-    for c in l:
+    for c in l.rstrip('\n'):
         if c in string.ascii_lowercase:
             mask+='?l'
-        if c in string.ascii_uppercase:
+        elif c in string.ascii_uppercase:
             mask+='?u'
-        if c in string.punctuation:
+        elif c in string.punctuation+" ":
             mask+='?s'
-        if c in string.digits:
+        elif c in string.digits:
             mask+='?d'
     print(mask)
