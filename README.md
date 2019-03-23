@@ -11,6 +11,7 @@ For some notes on cracking and wordlist creation see
 * `easy_patterns.py` prints easy character patterns and repetitions
 * `list_combine.py` combines every word from two text files
 * `mask_extractor.py` generate hashcat mask files from found passwords
+* `mask_eval.py` calculate quality of masks from brute force results
 * `webcrawl.py` prints every word found in the body of a website
 
 ## masks
