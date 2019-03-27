@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser()
 parser.add_argument("file", help="password file")
+parser.add_argument("-v","--verbose", default=False, action="store_true", help="verbose output")
 args=parser.parse_args()
 
 infile=open(args.file,'r')
@@ -38,6 +39,9 @@ for l in infile:
     mask=l[8:].rstrip()
     complexity=calc(mask)
     if complexity == 0:
-        print("unknown format '%s'" % line.rstrip())
+        print("unknown format '%s'" % l.rstrip())
     else:
-        print("%f %s" % (count/complexity,mask))
+        if args.verbose:
+            print("%f %d/%d %s" % (count/complexity,count,complexity,mask))
+        else:
+            print("%f %s" % (count/complexity,mask))

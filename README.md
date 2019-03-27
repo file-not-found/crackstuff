@@ -21,11 +21,9 @@ Mask files for `hashcat`.
 
 ## rules
 
-The rules in `clean.rule` are optimized for lowercase words but work for 
-password lists like `rockyou.txt` as well.  They are roughly sorted by quality. 
-To create smaller rulesets use `head -n `.
+A huge rule file for `hashcat` roughly sorted by quality.
 
 ## wordlists
 
-Some wordlists coverted to lowercase. Files with `+` in their names contain 
+Some wordlists converted to lowercase. Files with `+` in their names contain 
 additional words.
