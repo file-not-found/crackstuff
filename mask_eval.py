@@ -3,8 +3,9 @@ import string
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
-parser.add_argument("file", help="password file")
+parser.add_argument("file", help="masks file")
 parser.add_argument("-v","--verbose", default=False, action="store_true", help="verbose output")
+parser.add_argument("-c","--count", default=False, action="store_true", help="file contains result count")
 args=parser.parse_args()
 
 infile=open(args.file,'r')
@@ -35,13 +36,19 @@ def calc(mask):
     return i 
 
 for l in infile:
-    count=int(l[:8])
-    mask=l[8:].rstrip()
+    if args.count:
+        count=int(l[:8])
+        mask=l[8:].rstrip()
+    else:
+        mask=l.rstrip()
     complexity=calc(mask)
     if complexity == 0:
         print("unknown format '%s'" % l.rstrip())
     else:
-        if args.verbose:
-            print("%f %d/%d %s" % (count/complexity,count,complexity,mask))
+        if args.count:
+            if args.verbose:
+                print("%f %d/%d %s" % (count/complexity,count,complexity,mask))
+            else:
+                print("%f %s" % (count/complexity,mask))
         else:
-            print("%f %s" % (count/complexity,mask))
+            print("%d %s" % (complexity,mask))
