@@ -4,9 +4,9 @@ from argparse import ArgumentParser
 parser = ArgumentParser()
 parser.add_argument("-s", "--start", type=int, default=1950, 
     help="year to start from")
-parser.add_argument("-e", "--end", type=int, default=2017,
+parser.add_argument("-e", "--end", type=int, default=2050,
     help="year to end with")
-parser.add_argument("-f", "--format", type=int, choices=[1,2,3,4,5], default=3,
+parser.add_argument("-f", "--format", type=int, choices=[1,2,3,4,5], default=5,
     help="1=DDMMYYYY, 2=MMDDYYYY, 3=DDmonthYYYY, 4=DDmonYYYY, 5=all")
 parser.add_argument("-d", "--delimiter", type=str, default='',
     help="delimiter between day, month and year")
