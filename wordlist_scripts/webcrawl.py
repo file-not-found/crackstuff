@@ -1,6 +1,6 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 from bs4 import BeautifulSoup
-from urllib2 import Request,urlopen
+from urllib.request import Request, urlopen
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
@@ -35,7 +35,7 @@ def get_words(url, depth):
     soup=BeautifulSoup(html, 'html.parser')
 
     try:
-        text=soup.body.text.encode('utf-8')
+        text=soup.body.text
     except:
         text=None
 
